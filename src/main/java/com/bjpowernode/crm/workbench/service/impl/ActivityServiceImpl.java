@@ -7,6 +7,7 @@ import com.bjpowernode.crm.vo.PaginationVO;
 import com.bjpowernode.crm.workbench.dao.ActivityDao;
 import com.bjpowernode.crm.workbench.dao.ActivityRemarkDao;
 import com.bjpowernode.crm.workbench.domain.Activity;
+import com.bjpowernode.crm.workbench.domain.ActivityRemark;
 import com.bjpowernode.crm.workbench.service.ActivityService;
 
 import java.util.HashMap;
@@ -89,5 +90,65 @@ public class ActivityServiceImpl implements ActivityService {
             flag = false;
         }
         return flag;
+    }
+
+    @Override
+    public Activity detail(String id) {
+        Activity a =activityDao.detail(id);
+        return a;
+    }
+
+    @Override
+    public List<Activity> getRemarkListByAid(String activityId) {
+        List<Activity> arList = activityRemarkDao.getRemarkListByAid(activityId);
+        return arList;
+    }
+
+    @Override
+    public boolean deleteRemark(String id) {
+        boolean flag = true;
+        int count = activityRemarkDao.deleteRemark(id);
+        if (count!=1){
+            flag=false;
+        }
+        return flag;
+}
+
+    @Override
+    public boolean saveRemark(ActivityRemark ar) {
+        boolean flag = true;
+        int count = activityRemarkDao.saveRemark(ar);
+        if (count!=1){
+            flag=false;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean updateRemark(ActivityRemark ar) {
+        boolean flag = true;
+        int count = activityRemarkDao.updateRemark(ar);
+        if (count != 1){
+            flag=false;
+        }
+        return flag;
+    }
+
+    @Override
+    public List<Activity> getActivityListByClueId(String clueId) {
+        List<Activity> aList =  activityDao.getActivityListByClueId(clueId);
+        return aList;
+    }
+
+    @Override
+    public List<Activity> getActivityListByNameAndNotByClueId(Map<String, String> map) {
+        List<Activity> aList =activityDao.getActivityListByNameAndNotByClueId(map);
+        return aList;
+    }
+
+    @Override
+    public List<Activity> getActivityListByName(String aname) {
+        List<Activity> aList = activityDao.getActivityListByName(aname);
+        return aList;
     }
 }
